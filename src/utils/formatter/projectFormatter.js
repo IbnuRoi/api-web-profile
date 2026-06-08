@@ -8,6 +8,8 @@ const projectsFormat = (data) => ({
     day: '2-digit'
   }),
   imageUrl: data.imageUrl,
+  sourceCode: data.githubLink,
+  livePreview: data.livePreview,
 
   description: {
     short: data.shortDescription,
