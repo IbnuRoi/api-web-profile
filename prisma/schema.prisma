@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Users {
+  id        Int        @id @default(autoincrement())
+  username  String     @unique @db.VarChar(255)
+  password  String     @db.VarChar
+  role      String     @default("admin") @db.VarChar(50)
+  createdAt DateTime   @default(now())
+  projects  Projects[]
+}
+
+model Projects {
+  id               Int           @id @default(autoincrement())
+  projectId        String        @unique @db.VarChar
+  name             String        @db.VarChar(255)
+  projectType      String        @db.VarChar(100)
+  shortDescription String
+  challenge        String
+  solution         String
+  imageUrl         String        @db.VarChar
+  githubLink String? @db.VarChar()
+  livePreview String? @db.VarChar()
+  createdAt        DateTime      @default(now())
+  description      String
+  date             DateTime
+  username         String
+  imageId          String        @db.VarChar
+  keyFeatures      KeyFeatures[]
+  user             Users         @relation(fields: [username], references: [username], onDelete: Cascade)
+  techStacks       TechStacks[]
+}
+
+model KeyFeatures {
+  id        Int      @id @default(autoincrement())
+  projectId String
+  feature   String
+  projects  Projects @relation(fields: [projectId], references: [projectId], onDelete: Cascade)
+}
+
+model TechStacks {
+  id        Int      @id @default(autoincrement())
+  projectId String
+  category  String   @db.VarChar(100)
+  name      String   @db.VarChar(100)
+  projects  Projects @relation(fields: [projectId], references: [projectId], onDelete: Cascade)
+}
