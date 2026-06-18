@@ -1,0 +1,233 @@
+tags:
+  - name: Projects
+    description: Projects management endpoints
+
+paths:
+  /api/private/projects:
+    post:
+      summary: Create new project
+      tags:
+        - Projects
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - date
+                - projectType
+                - shortDescription
+                - description
+                - challenge
+                - solution
+                - image
+                - keyFeatures
+                - techStacks
+              properties:
+                name:
+                  type: string
+                  example: Web E-commerce
+                date:
+                  type: string
+                  example: 2025-03-5
+                projectType:
+                  type: string
+                  example: Web Application
+                shortDescription:
+                  type: string
+                  example: Short description here
+                description:
+                  type: string
+                  example: Full description here
+                challenge:
+                  type: string
+                  example: Challenge here
+                solution:
+                  type: string
+                  example: Solution here
+                image:
+                  type: string
+                  format: binary
+                  description: Banner project (jpg/png/webp, max 2MB)
+                keyFeatures:
+                  type: string
+                  example: '["Login", "Dashboard"]'
+                  description: JSON string array
+                techStacks:
+                  type: string
+                  example: '[{"category":"frontend", "name":"Next.js"}]'
+                  description: JSON string array
+      responses:
+        "201":
+          description: Project created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: Succesfully add new project with id 68f8dc09-d2ee-4cc5-a0c..
+
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal server error
+
+  /projects/:projectId:
+    put:
+      summary: Update project by projectId
+      tags:
+        - Projects
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                date:
+                  type: string
+                projectType:
+                  type: string
+                shortDescription:
+                  type: string
+                description:
+                  type: string
+                challenge:
+                  type: string
+                solution:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+                  description: Optional. Leave empty to keep the current image.
+                keyFeatures:
+                  type: string
+                  description: JSON string array
+                techStacks:
+                  type: string
+                  description: JSON string array
+      responses:
+        "200":
+          description: Project delete successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Succesfully update project with id 68f8dc09-d2ee-4cc5-a0c..
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: Unauthorized user or session timeout
+
+        "404":
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Project not found   
+
+  /api/projects/:projectId:
+    delete:
+      summary: Delete project by projectId
+      tags:
+        - Projects
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Project delete successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Succesfully delete project with id 68f8dc09-d2ee-4cc5-a0c..
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: Unauthorized user or session timeout
+
+        "404":
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Project with id 68f8dc09-d2ee-4cc5-a0c.. not found
