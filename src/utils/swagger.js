@@ -1,10 +1,4 @@
 const swaggerJsdoc = require('swagger-jsdoc')
-const path = require('path')
-const fs = require('fs')
-
-const docsPath = path.resolve('./docs')
-console.log('Docs path:', docsPath)
-console.log('Files found:', fs.existsSync(docsPath) ? fs.readdirSync(docsPath) : 'FOLDER NOT FOUND')
 
 const options = {
     definition: {
