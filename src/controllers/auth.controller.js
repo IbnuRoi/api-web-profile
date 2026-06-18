@@ -3,7 +3,6 @@ const response = require("../utils/response");
 
 
 const registerUser = async (req, res) => {
-    console.log
     try {
         const data = await registerUserService(req)
         response(200, data, 'New user created successfully', res)
@@ -20,7 +19,7 @@ const loginUser = async (req, res) => {
         if (err.message === 'Invalid email or password') {
             return response(401, null, err.message, res)
         }
-        response(500, null, err.message, res)
+        response(401, null, err.message, res)
     }
 }
 

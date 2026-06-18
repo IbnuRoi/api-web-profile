@@ -5,6 +5,7 @@ const { findUserQuery, createUserQuery } = require("../repositories/user");
 // Add new User
 const registerUserService = async (req) => {
     const data = req.body
+    
 
     const exist = await findUserQuery(data.username)
     if(exist) {
@@ -46,9 +47,7 @@ const loginUserService = async (req) => {
     )
 
     const result = {
-        username: user.username,
-        role: user.role,
-        tokenJwt: token
+        token: token
     }
 
     return result

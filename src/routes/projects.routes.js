@@ -5,7 +5,6 @@ const upload = require("../middlewares/upload.middleware");
 
 const router = Router()
 
-// POST Method
 router.post('/projects', upload.single('image'), createProject)
 router.put('/projects/:projectId', upload.single('image'), updateProject)
 router.delete('/projects/:projectId', deleteProject)
