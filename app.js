@@ -2,6 +2,8 @@ require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
 const bodyParser = require('body-parser')
+const swaggerUi = require('swagger-ui-express')
+const swaggerSpec = require('./src/utils/swagger')
 
 // Import Routes
 const authRoute = require('./src/routes/auth.routes')
@@ -16,6 +18,14 @@ const app = express()
 app.use(cors())
 
 app.use(bodyParser.json())
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    swaggerOptions: {
+        supportedSubmitMethods: []
+    },
+    customSiteTitle: 'Portfolio API Docs',
+    customCss: '.swagger-ui .topbar { display: none }'
+}))
 
 // Projects Route
 app.use('/api/private', authMiddleware, projectsRoute)
