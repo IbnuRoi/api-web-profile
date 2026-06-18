@@ -92,7 +92,7 @@ paths:
 
   /projects/:projectId:
     put:
-      summary: Update project by projectId
+      summary: Update project by Id
       tags:
         - Projects
       security:
@@ -178,7 +178,7 @@ paths:
 
   /api/projects/:projectId:
     delete:
-      summary: Delete project by projectId
+      summary: Delete project by Id
       tags:
         - Projects
       security:

@@ -23,24 +23,25 @@ const options = {
                 Project: {
                     type: 'object',
                     properties: {
-                        projectId: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000'},
+                        id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000'},
                         name: { type: 'string', example: 'E-commerce Website'},
                         projectType: { type: 'string', example: 'Web Application'},
-                        shortDescription: { type: 'string', example: 'Short description here'},
-                        description: { type: 'string', example: 'Full description here'},
-                        challenge: { type: 'string', example: 'Challenge here'},
-                        solution: { type: 'string', example: 'Solution here'},
+                        date: { type: 'string', example: 'January 21, 2026'},
                         imageUrl: { type: 'string', example: 'https://res.cloudinary.com/...'},
-                        githubLink: { type: 'string', example: 'https://github.com/...'},
+                        sourceCode: { type: 'string', example: 'https://github.com/...'},
                         livePreview: { type: 'string', example: 'https://project.vercel.app'},
-                        keyFeatures: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    id: { type: 'integer', example: 1},
-                                    feature: { type: 'string', example: 'User-Friendly Navigation'},
-                                }
+                        description: {
+                            type: 'object',
+                            properties: {
+                                short:  { type: 'string', example: 'Short description here'},
+                                long: { type: 'string', example: 'Full description here'}
+                            }
+                        },
+                        techChallenge: {
+                            type: 'object',
+                            properties: {
+                                challenge: { type: 'string', example: 'Challenge here'},
+                                solution: { type: 'string', example: 'Solution here'},
                             }
                         },
                         techStacks: {
@@ -53,7 +54,18 @@ const options = {
                                     name: { type: 'string', example: 'Next.js'},
                                 }
                             }
-                        }
+                        },
+                        keyFeatures: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    id: { type: 'integer', example: 1},
+                                    feature: { type: 'string', example: 'User-Friendly Navigation'},
+                                }
+                            }
+                        },
+                        createdAt: { type: 'string', example: '2026-06-08T15:02:56.694Z'}
                     }
                 },
                 Metadata: {

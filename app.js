@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     swaggerOptions: {
-        supportedSubmitMethods: []
+        supportedSubmitMethods: ['get']
     },
     customSiteTitle: 'Portfolio API Docs',
     customCss: '.swagger-ui .topbar { display: none }'
