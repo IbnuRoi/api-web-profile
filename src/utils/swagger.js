@@ -1,5 +1,9 @@
 const swaggerJsdoc = require('swagger-jsdoc')
 
+const docsPath = path.resolve('./docs')
+console.log('Docs path:', docsPath)
+console.log('Files found:', fs.existsSync(docsPath) ? fs.readdirSync(docsPath) : 'FOLDER NOT FOUND')
+
 const options = {
     definition: {
         openapi: '3.0.0',
