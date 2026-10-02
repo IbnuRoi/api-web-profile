@@ -93,7 +93,7 @@ const createProjectQuery = async (user, img, data) => {
         projectId,
         username: user,
         name: data.name,
-        date: new Date(data.date),
+        date: data.date && !isNaN(new Date(data.date).getTime()) ? new Date(data.date) : new Date(),
         projectType: data.projectType,
         shortDescription: data.shortDescription,
         description: data.description,

@@ -76,12 +76,22 @@ const getCarouselService = async() => {
   return result.map(projectsFormat)
 }
 
+const safeJsonParse = (val, defaultVal = []) => {
+  if (!val) return defaultVal;
+  if (typeof val === 'object') return val;
+  try {
+    return JSON.parse(val);
+  } catch {
+    return defaultVal;
+  }
+};
+
 // Add New Project
 const createProjectService = async (req) => {
   const {username} = req.user
   const values = req.body
-  values.keyFeatures = JSON.parse(values.keyFeatures ?? '[]')
-  values.techStacks = JSON.parse(values.techStacks ?? '[]')
+  values.keyFeatures = safeJsonParse(values.keyFeatures, [])
+  values.techStacks = safeJsonParse(values.techStacks, [])
   let dataImg = null
 
   try {
@@ -89,7 +99,7 @@ const createProjectService = async (req) => {
       throw new Error('Image not uploaded yet')
     }
     const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
-    const dataImg = await cloudinary.uploader.upload(fileStr, {
+    dataImg = await cloudinary.uploader.upload(fileStr, {
       // Upload File
       folder: 'project_banner'
     })
@@ -115,8 +125,8 @@ const updateProjectService = async (projectId, req) => {
   if (!project) throw new Error('Project not found')
 
   const values = req.body
-  values.keyFeatures = JSON.parse(values.keyFeatures ?? '[]')
-  values.techStacks = JSON.parse(values.techStacks ?? '[]')
+  values.keyFeatures = safeJsonParse(values.keyFeatures, [])
+  values.techStacks = safeJsonParse(values.techStacks, [])
 
   let img = {
     imageId: project.imageId,

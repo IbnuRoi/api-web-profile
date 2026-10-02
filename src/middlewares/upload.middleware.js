@@ -6,8 +6,8 @@ const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase()
-    if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
-        return cb(new Error("Hanya bisa mengupload gambar (.jpg, .jpeg, .jpeg)"))
+    if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png' && ext !== '.webp') {
+        return cb(new Error("Hanya bisa mengupload gambar (.jpg, .jpeg, .png, .webp)"))
     }
     cb(null, true)
 }
